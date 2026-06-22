@@ -3,10 +3,7 @@
 // --- Project Data ---
 const projectsData = {
     1: {
-        title: "The C-Scheme Duplex",
-        category: "Residential",
-        city: "Jaipur",
-        description: "A modern, light-filled duplex in the heart of C-Scheme. The design integrates local Jodhpur sandstone flooring, bespoke walnut furniture, and custom copper lighting, resulting in an airy space that feels grounded in Rajasthani craftsmanship.",
+        title: "Image 1",
         images: [
             "assets/unnamed (4).webp",
             "assets/515018580_17873657514379780_114806818264473941_n.jpg",
@@ -14,10 +11,7 @@ const projectsData = {
         ]
     },
     2: {
-        title: "The Raja Park Residence",
-        category: "Residential",
-        city: "Jaipur",
-        description: "A contemporary family sanctuary featuring high ceilings, warm plaster walls, and hand-woven cane details. Large windows open to a private courtyard, creating a peaceful escape within Raja Park.",
+        title: "Image 2",
         images: [
             "assets/unnamed (1).webp",
             "assets/515375713_17873657511379780_1361309602168478996_n.jpg",
@@ -25,10 +19,7 @@ const projectsData = {
         ]
     },
     3: {
-        title: "The Malviya Nagar Penthouse",
-        category: "Residential",
-        city: "Jaipur",
-        description: "A minimalist penthouse with a warm material palette. It blends sage green upholstery, fluted oak paneling, and micro-cement finishes, resulting in a sanctuary that is both sophisticated and sensory.",
+        title: "Image 3",
         images: [
             "assets/unnamed (2).webp",
             "assets/515682765_17873657493379780_5956521238110530393_n.jpg",
@@ -36,10 +27,7 @@ const projectsData = {
         ]
     },
     4: {
-        title: "The Civil Lines Bungalow",
-        category: "Residential",
-        city: "Jaipur",
-        description: "A styling project for a historic bungalow. We curated a collection of Rajasthani block-printed textiles, mid-century modern furniture, and contemporary art, highlighting the dialogue between heritage and modernity.",
+        title: "Image 4",
         images: [
             "assets/unnamed (3).webp",
             "assets/515903200_17873657496379780_2094141731495515911_n.jpg",
@@ -47,10 +35,7 @@ const projectsData = {
         ]
     },
     5: {
-        title: "The Vaishali Nagar Villa",
-        category: "Residential",
-        city: "Jaipur",
-        description: "A luxury residential project focused on open-plan living and clean geometries. Natural stone walls, raw timber ceilings, and warm copper accents define the spaces, giving the villa a sense of quiet luxury.",
+        title: "Image 5",
         images: [
             "assets/unnamed.webp",
             "assets/515963142_17873657523379780_8362843561450044996_n.jpg",
@@ -58,10 +43,7 @@ const projectsData = {
         ]
     },
     6: {
-        title: "The Jaipur Art Gallery",
-        category: "Commercial",
-        city: "Jaipur",
-        description: "A boutique exhibition space in Jaipur. Designed to display contemporary artworks, the layout features custom curved white walls, textured plaster finishes, and minimal track lighting to let the art speak.",
+        title: "Image 6",
         images: [
             "assets/unnamed (5).webp",
             "assets/515018580_17873657514379780_114806818264473941_n.jpg",
@@ -111,6 +93,10 @@ function openModal(projectId) {
     
     // Build Modal Layout with slideshow (removed text description and header details)
     modalContent.innerHTML = `
+        <div class="modal-header">
+            <h3 class="modal-title">${project.title}</h3>
+        </div>
+        
         <div class="modal-slideshow-container">
             <div class="modal-slides-wrapper">
                 ${project.images.map((imgUrl, i) => `
@@ -268,7 +254,7 @@ if (slides.length > 0) {
 }
 
 // --- Scroll Reveal Animations ---
-const revealElements = document.querySelectorAll('.reveal-fade');
+const revealElements = document.querySelectorAll('.reveal-fade, .section-header, .portfolio-card');
 
 const revealOnScrollObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -282,7 +268,17 @@ const revealOnScrollObserver = new IntersectionObserver((entries, observer) => {
     rootMargin: "0px 0px -50px 0px"
 });
 
-revealElements.forEach(el => revealOnScrollObserver.observe(el));
+revealElements.forEach((el, index) => {
+    if (!el.classList.contains('reveal-fade')) {
+        el.classList.add('reveal-on-scroll');
+    }
+
+    if (el.classList.contains('portfolio-card')) {
+        el.style.setProperty('--reveal-delay', `${(index % 6) * 80}ms`);
+    }
+
+    revealOnScrollObserver.observe(el);
+});
 
 // --- Contact Form Submission Feedback ---
 if (contactForm) {

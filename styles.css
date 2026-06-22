@@ -13,6 +13,8 @@
     --color-text-muted: #555552;
     --color-bronze: #B07D5B;
     --color-bronze-light: #C59876;
+    --color-pill: #EEE2D1;
+    --color-pill-deep: #DED0BC;
     --color-sage: #8A9B8A;
     --color-sage-light: #A5B5A5;
     --color-white: #FFFFFF;
@@ -197,23 +199,20 @@ h1, h2, h3, h4 {
 /* --- Sticky Minimal Navigation --- */
 .navbar {
     position: fixed;
-    top: 0;
+    top: 1.25rem;
     left: 0;
     width: 100%;
     z-index: 1000;
-    height: var(--header-height);
+    height: auto;
     display: flex;
     align-items: center;
     transition: var(--transition-smooth);
     background-color: transparent;
+    pointer-events: none;
 }
 
 .navbar.scrolled {
-    background-color: rgba(247, 245, 240, 0.95);
-    height: 70px;
-    box-shadow: 0 5px 25px rgba(28, 28, 26, 0.03);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(176, 125, 91, 0.1);
+    background-color: transparent;
 }
 
 .nav-container {
@@ -223,6 +222,20 @@ h1, h2, h3, h4 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 3rem;
+    padding: 0.75rem 1.35rem;
+    border: 1px solid rgba(176, 125, 91, 0.18);
+    border-radius: 999px;
+    background-color: rgba(238, 226, 209, 0.9);
+    box-shadow: 0 18px 45px rgba(60, 45, 32, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(14px);
+    pointer-events: auto;
+    transition: var(--transition-smooth);
+}
+
+.navbar.scrolled .nav-container {
+    background-color: rgba(238, 226, 209, 0.94);
+    box-shadow: 0 16px 38px rgba(60, 45, 32, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .nav-logo {
@@ -230,7 +243,7 @@ h1, h2, h3, h4 {
     font-size: 1.8rem;
     font-weight: 400;
     letter-spacing: 0.05em;
-    color: var(--color-white);
+    color: var(--color-text);
     transition: var(--transition-fast);
     display: flex;
     align-items: center;
@@ -238,7 +251,7 @@ h1, h2, h3, h4 {
 }
 
 .logo-img {
-    height: 45px;
+    height: 40px;
     width: auto;
     object-fit: contain;
     transition: var(--transition-smooth);
@@ -258,7 +271,7 @@ h1, h2, h3, h4 {
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(28, 28, 26, 0.78);
     position: relative;
     padding: 0.5rem 0;
 }
@@ -275,7 +288,7 @@ h1, h2, h3, h4 {
 }
 
 .nav-links a:hover {
-    color: var(--color-white);
+    color: var(--color-text);
 }
 
 .nav-links a:hover::after {
@@ -283,7 +296,7 @@ h1, h2, h3, h4 {
 }
 
 .navbar.scrolled .nav-links a {
-    color: var(--color-text-muted);
+    color: rgba(28, 28, 26, 0.78);
 }
 
 .navbar.scrolled .nav-links a:hover {
@@ -303,7 +316,7 @@ h1, h2, h3, h4 {
 .nav-toggle .bar {
     height: 1px;
     width: 100%;
-    background-color: var(--color-white);
+    background-color: var(--color-text);
     transition: var(--transition-fast);
 }
 
@@ -421,11 +434,16 @@ h1, h2, h3, h4 {
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 4rem 3rem;
-    margin-top: 4rem;
+    gap: 5rem 4rem;
+    margin-top: 4.5rem;
 }
 
-
+/* Asymmetric grid styling on larger screens */
+@media (min-width: 992px) {
+    .portfolio-card:nth-child(even) {
+        margin-top: 0;
+    }
+}
 
 .portfolio-card {
     cursor: pointer;
@@ -438,6 +456,10 @@ h1, h2, h3, h4 {
     overflow: hidden;
     aspect-ratio: 4 / 3;
     background-color: #e5e0d8;
+    border-radius: 8px;
+    box-shadow: 0 22px 55px rgba(60, 45, 32, 0.11);
+    transform: translateZ(0);
+    transition: box-shadow 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .card-img-wrapper img {
@@ -453,7 +475,7 @@ h1, h2, h3, h4 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(28, 28, 26, 0.4);
+    background-color: rgba(28, 28, 26, 0.28);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -469,8 +491,10 @@ h1, h2, h3, h4 {
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    border-bottom: 1px solid var(--color-white);
-    padding-bottom: 0.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+    padding: 0.65rem 1.15rem;
+    background-color: rgba(247, 245, 240, 0.08);
     transform: translateY(10px);
     transition: var(--transition-smooth);
 }
@@ -478,7 +502,13 @@ h1, h2, h3, h4 {
 /* Hover & Focus States */
 .portfolio-card:hover .card-img-wrapper img,
 .portfolio-card:focus-within .card-img-wrapper img {
-    transform: scale(1.06);
+    transform: scale(1.04);
+}
+
+.portfolio-card:hover .card-img-wrapper,
+.portfolio-card:focus-within .card-img-wrapper {
+    transform: translateY(-4px);
+    box-shadow: 0 30px 70px rgba(60, 45, 32, 0.16);
 }
 
 .portfolio-card:hover .card-overlay,
@@ -492,20 +522,22 @@ h1, h2, h3, h4 {
 }
 
 .card-info {
-    margin-top: 1.5rem;
+    margin-top: 1.15rem;
 }
 
 .project-name {
-    font-size: 1.75rem;
-    font-weight: 400;
+    font-size: clamp(1.55rem, 2.4vw, 1.95rem);
+    font-weight: 300;
     color: var(--color-text);
     margin-bottom: 0.25rem;
+    line-height: 1.08;
 }
 
 .project-meta {
     font-size: 0.85rem;
     letter-spacing: 0.05em;
     color: var(--color-text-muted);
+    display: none;
 }
 
 /* --- About Section --- */
@@ -986,6 +1018,7 @@ h1, h2, h3, h4 {
     color: var(--color-bronze);
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    display: none;
 }
 
 /* Modal Slideshow Styling */
@@ -1100,6 +1133,18 @@ h1, h2, h3, h4 {
     transform: translateY(0);
 }
 
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(34px);
+    transition: opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1), transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-on-scroll.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* --- Responsive Adaptations (Mobile-first) --- */
 
 @media (max-width: 991px) {
@@ -1130,6 +1175,16 @@ h1, h2, h3, h4 {
 
 @media (max-width: 768px) {
     /* Navbar Mobile */
+    .navbar {
+        top: 0.85rem;
+    }
+
+    .nav-container {
+        gap: 1rem;
+        padding: 0.65rem 1rem;
+        width: 92%;
+    }
+
     .nav-toggle {
         display: flex;
     }
@@ -1178,7 +1233,7 @@ h1, h2, h3, h4 {
     /* Grid Adjustments */
     .portfolio-grid {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 3.5rem;
     }
     
     /* Process timeline layout */
