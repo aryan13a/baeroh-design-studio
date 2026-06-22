@@ -15,10 +15,13 @@ baeroh-design-studio/
 
 ## Setup & Running Instructions
 
-### Option 1: Direct File Launch
+### Option 1: Live Deployment (GitHub Pages)
+The project is hosted live at: [https://aryan13a.github.io/baeroh-design-studio/](https://aryan13a.github.io/baeroh-design-studio/)
+
+### Option 2: Direct File Launch
 Double-click `index.html` to open it in your browser. Since the project uses vanilla HTML, CSS, and JS, no compilation or bundlers are required.
 
-### Option 2: Live Local Server
+### Option 3: Live Local Server
 Run a local development server in the root of the project directory:
 
 ```bash
