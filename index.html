@@ -327,37 +327,51 @@
                 <p class="journal-tagline"><a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer">@baerohdesigns</a></p>
             </div>
             
-            <div class="journal-grid reveal-fade">
-                <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-item">
-                    <img src="assets/515018580_17873657514379780_114806818264473941_n.jpg" alt="Baeroh Design photo 1" loading="lazy">
-                    <div class="journal-overlay">
-                        <span class="journal-icon">&#128247;</span>
+            <div class="journal-slider-container reveal-fade">
+                <div class="journal-slider" id="journalSlider">
+                    <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-slide active">
+                        <img src="assets/515018580_17873657514379780_114806818264473941_n.jpg" alt="Baeroh Design photo 1">
+                        <div class="journal-slide-overlay">
+                            <span class="journal-slide-icon">&#128247;</span>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-slide">
+                        <img src="assets/515375713_17873657511379780_1361309602168478996_n.jpg" alt="Baeroh Design photo 2">
+                        <div class="journal-slide-overlay">
+                            <span class="journal-slide-icon">&#128247;</span>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-slide">
+                        <img src="assets/515682765_17873657493379780_5956521238110530393_n.jpg" alt="Baeroh Design photo 3">
+                        <div class="journal-slide-overlay">
+                            <span class="journal-slide-icon">&#128247;</span>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-slide">
+                        <img src="assets/515903200_17873657496379780_2094141731495515911_n.jpg" alt="Baeroh Design photo 4">
+                        <div class="journal-slide-overlay">
+                            <span class="journal-slide-icon">&#128247;</span>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-slide">
+                        <img src="assets/515963142_17873657523379780_8362843561450044996_n.jpg" alt="Baeroh Design photo 5">
+                        <div class="journal-slide-overlay">
+                            <span class="journal-slide-icon">&#128247;</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="journal-slider-controls">
+                    <button class="journal-slider-btn prev-j-btn" id="prevJournal" aria-label="Previous image">&#8592;</button>
+                    <div class="journal-slider-dots" id="journalSliderDots">
+                        <span class="j-dot active" data-j-index="0"></span>
+                        <span class="j-dot" data-j-index="1"></span>
+                        <span class="j-dot" data-j-index="2"></span>
+                        <span class="j-dot" data-j-index="3"></span>
+                        <span class="j-dot" data-j-index="4"></span>
                     </div>
-                </a>
-                <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-item">
-                    <img src="assets/515375713_17873657511379780_1361309602168478996_n.jpg" alt="Baeroh Design photo 2" loading="lazy">
-                    <div class="journal-overlay">
-                        <span class="journal-icon">&#128247;</span>
-                    </div>
-                </a>
-                <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-item">
-                    <img src="assets/515682765_17873657493379780_5956521238110530393_n.jpg" alt="Baeroh Design photo 3" loading="lazy">
-                    <div class="journal-overlay">
-                        <span class="journal-icon">&#128247;</span>
-                    </div>
-                </a>
-                <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-item">
-                    <img src="assets/515903200_17873657496379780_2094141731495515911_n.jpg" alt="Baeroh Design photo 4" loading="lazy">
-                    <div class="journal-overlay">
-                        <span class="journal-icon">&#128247;</span>
-                    </div>
-                </a>
-                <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-item">
-                    <img src="assets/515963142_17873657523379780_8362843561450044996_n.jpg" alt="Baeroh Design photo 5" loading="lazy">
-                    <div class="journal-overlay">
-                        <span class="journal-icon">&#128247;</span>
-                    </div>
-                </a>
+                    <button class="journal-slider-btn next-j-btn" id="nextJournal" aria-label="Next image">&#8594;</button>
+                </div>
             </div>
         </div>
     </section>
@@ -454,6 +468,20 @@
                 <!-- Injected via JavaScript -->
             </div>
         </div>
+    </div>
+
+    <!-- Floating Actions (WhatsApp & Call) -->
+    <div class="floating-actions" id="floatingActions">
+        <a href="tel:+919509628808" class="float-btn float-call" aria-label="Call Baeroh Design Studio">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+                <path fill="currentColor" d="M6.62 10.79a15.15 15.15 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.27 11.72 11.72 0 0 0 3.67.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.72 11.72 0 0 0 .58 3.67 1 1 0 0 1-.27 1.11z"/>
+            </svg>
+        </a>
+        <a href="https://wa.me/919509628808" target="_blank" rel="noopener noreferrer" class="float-btn float-whatsapp" aria-label="Message Baeroh Design Studio on WhatsApp">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+                <path fill="currentColor" d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.333 4.993L2 22l5.13-1.347a9.923 9.923 0 0 0 4.88 1.28c5.508 0 9.99-4.479 9.99-9.986 0-2.67-1.037-5.18-2.92-7.062A9.925 9.925 0 0 0 12.012 2zm5.726 14.122c-.274.773-1.365 1.4-1.88 1.472-.452.062-.976.084-3.218-.842-2.866-1.185-4.698-4.1-4.842-4.29-.143-.19-1.163-1.545-1.163-2.947 0-1.402.735-2.09.997-2.362.263-.274.572-.34.762-.34.19 0 .38 0 .547.009.172.009.404-.065.63.483.228.547.785 1.916.852 2.052.067.137.114.294.02.483-.095.19-.143.303-.285.467-.143.167-.3.376-.428.505-.143.142-.294.298-.124.59.17.29.756 1.246 1.622 2.016.915.813 1.683 1.066 1.922 1.183.238.118.38.1.523-.066.143-.166.619-.718.785-.962.167-.243.333-.204.562-.118.23.085 1.45.683 1.7.808.25.123.417.185.476.289.06.1.06.579-.214 1.352z"/>
+            </svg>
+        </a>
     </div>
 
     <!-- Main Script -->

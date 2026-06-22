@@ -993,31 +993,104 @@ h1, h2, h3, h4 {
     text-transform: uppercase;
 }
 
-.modal-body {
-    display: grid;
-    grid-template-columns: 1.2fr 1.8fr;
-    gap: 3.5rem;
-    align-items: start;
-}
-
-.modal-desc {
-    font-family: var(--font-serif);
-    font-size: 1.3rem;
-    line-height: 1.8;
-    color: var(--color-text);
-}
-
-.modal-images {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-}
-
-.modal-images img {
+/* Modal Slideshow Styling */
+.modal-slideshow-container {
+    position: relative;
     width: 100%;
-    aspect-ratio: 3/2;
-    object-fit: cover;
+    max-width: 800px;
+    margin: 0 auto;
+    aspect-ratio: 3 / 2; /* Force aligned standard aspect ratio */
+    overflow: hidden;
     background-color: #e5e0d8;
+    border: 1px solid rgba(176, 125, 91, 0.1);
+}
+
+.modal-slides-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.modal-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    display: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.modal-slide.active {
+    display: block;
+    opacity: 1;
+}
+
+.modal-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Modal Nav Buttons */
+.modal-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(247, 245, 240, 0.85);
+    color: var(--color-text);
+    border: 1px solid rgba(176, 125, 91, 0.15);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.15rem;
+    z-index: 10;
+    transition: var(--transition-fast);
+    backdrop-filter: blur(4px);
+}
+
+.modal-nav-btn:hover {
+    background-color: var(--color-text);
+    color: var(--color-white);
+}
+
+.prev-slide-btn {
+    left: 1.5rem;
+}
+
+.next-slide-btn {
+    right: 1.5rem;
+}
+
+/* Modal Dots */
+.modal-slide-dots {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+}
+
+.m-dot {
+    width: 6px;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.m-dot.active {
+    background-color: var(--color-white);
+    transform: scale(1.3);
 }
 
 /* Scroll Animation classes */
@@ -1171,29 +1244,48 @@ h1, h2, h3, h4 {
     color: var(--color-text);
 }
 
-.journal-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1.5rem;
-}
-
-.journal-item {
+.journal-slider-container {
     position: relative;
-    overflow: hidden;
+    max-width: 550px; /* Elegant, square slide box */
+    margin: 0 auto;
     aspect-ratio: 1 / 1;
-    display: block;
+    overflow: hidden;
     background-color: #e5e0d8;
     border: 1px solid rgba(176, 125, 91, 0.1);
 }
 
-.journal-item img {
+.journal-slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.journal-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    display: none;
+}
+
+.journal-slide.active {
+    display: block;
+    opacity: 1;
+    animation: fadeIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.journal-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.journal-overlay {
+/* Journal Hover Overlay */
+.journal-slide-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -1208,35 +1300,121 @@ h1, h2, h3, h4 {
     backdrop-filter: blur(2px);
 }
 
-.journal-icon {
+.journal-slide-icon {
     color: var(--color-white);
     font-size: 1.5rem;
     transform: translateY(10px);
     transition: var(--transition-smooth);
 }
 
-.journal-item:hover img {
+.journal-slide:hover img {
     transform: scale(1.06);
 }
 
-.journal-item:hover .journal-overlay {
+.journal-slide:hover .journal-slide-overlay {
     opacity: 1;
 }
 
-.journal-item:hover .journal-icon {
+.journal-slide:hover .journal-slide-icon {
     transform: translateY(0);
 }
 
-@media (max-width: 991px) {
-    .journal-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-    }
+/* Journal Controls */
+.journal-slider-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
-@media (max-width: 576px) {
-    .journal-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
+.journal-slider-btn {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: var(--transition-fast);
+}
+
+.journal-slider-btn:hover {
+    color: var(--color-text);
+}
+
+.journal-slider-dots {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.j-dot {
+    width: 6px;
+    height: 6px;
+    background-color: rgba(28, 28, 26, 0.15);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.j-dot.active {
+    background-color: var(--color-bronze);
+    transform: scale(1.3);
+}
+
+/* --- Floating Actions (WhatsApp & Call) --- */
+.floating-actions {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.float-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: var(--color-white);
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(28, 28, 26, 0.1);
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(176, 125, 91, 0.15);
+    backdrop-filter: blur(5px);
+}
+
+.float-btn:hover {
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 15px 40px rgba(176, 125, 91, 0.2);
+}
+
+.float-call {
+    color: var(--color-bronze);
+}
+
+.float-call:hover {
+    background-color: var(--color-bronze);
+    color: var(--color-white);
+}
+
+.float-whatsapp {
+    color: var(--color-sage);
+}
+
+.float-whatsapp:hover {
+    background-color: var(--color-sage);
+    color: var(--color-white);
+}
+
+@media (max-width: 768px) {
+    .floating-actions {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+    .float-btn {
+        width: 3rem;
+        height: 3rem;
     }
 }

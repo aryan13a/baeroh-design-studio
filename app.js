@@ -109,23 +109,63 @@ function openModal(projectId) {
     const project = projectsData[projectId];
     if (!project) return;
     
-    // Build Modal Layout
+    // Build Modal Layout with slideshow (removed text description column)
     modalContent.innerHTML = `
         <div class="modal-header">
             <h3 class="modal-title">${project.title}</h3>
             <span class="modal-meta">${project.category} &mdash; ${project.city}</span>
         </div>
-        <div class="modal-body">
-            <div class="modal-info-col">
-                <p class="modal-desc">${project.description}</p>
-            </div>
-            <div class="modal-images">
+        
+        <div class="modal-slideshow-container">
+            <div class="modal-slides-wrapper">
                 ${project.images.map((imgUrl, i) => `
-                    <img src="${imgUrl}" alt="${project.title} photo ${i + 1}" loading="lazy">
+                    <div class="modal-slide ${i === 0 ? 'active' : ''}">
+                        <img src="${imgUrl}" alt="${project.title} photo ${i + 1}">
+                    </div>
+                `).join('')}
+            </div>
+            
+            <button class="modal-nav-btn prev-slide-btn" id="prevProjectSlide" aria-label="Previous slide">&#8592;</button>
+            <button class="modal-nav-btn next-slide-btn" id="nextProjectSlide" aria-label="Next slide">&#8594;</button>
+            
+            <div class="modal-slide-dots" id="modalSlideDots">
+                ${project.images.map((_, i) => `
+                    <span class="m-dot ${i === 0 ? 'active' : ''}" data-slide-index="${i}"></span>
                 `).join('')}
             </div>
         </div>
     `;
+    
+    // Set up modal slider logic
+    let currentModalSlide = 0;
+    const modalSlides = modalContent.querySelectorAll('.modal-slide');
+    const modalDots = modalContent.querySelectorAll('.m-dot');
+    const prevSlideBtn = modalContent.querySelector('.prev-slide-btn');
+    const nextSlideBtn = modalContent.querySelector('.next-slide-btn');
+    
+    function showModalSlide(index) {
+        modalSlides.forEach(s => s.classList.remove('active'));
+        modalDots.forEach(d => d.classList.remove('active'));
+        
+        if (index >= modalSlides.length) currentModalSlide = 0;
+        else if (index < 0) currentModalSlide = modalSlides.length - 1;
+        else currentModalSlide = index;
+        
+        modalSlides[currentModalSlide].classList.add('active');
+        modalDots[currentModalSlide].classList.add('active');
+    }
+    
+    if (prevSlideBtn && nextSlideBtn) {
+        prevSlideBtn.addEventListener('click', () => showModalSlide(currentModalSlide - 1));
+        nextSlideBtn.addEventListener('click', () => showModalSlide(currentModalSlide + 1));
+    }
+    
+    modalDots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+            const idx = parseInt(e.target.getAttribute('data-slide-index'));
+            showModalSlide(idx);
+        });
+    });
     
     projectModal.classList.add('open');
     document.body.style.overflow = 'hidden'; // Lock background scroll
@@ -297,4 +337,65 @@ if (contactForm) {
             }, 500);
         }, 4000);
     });
+}
+
+// --- Visual Journal Slider Logic ---
+const jSlides = document.querySelectorAll('.journal-slide');
+const jDots = document.querySelectorAll('.journal-slider-dots .j-dot');
+const prevJBtn = document.getElementById('prevJournal');
+const nextJBtn = document.getElementById('nextJournal');
+let currentJSlideIndex = 0;
+let jSlideInterval;
+
+function showJSlide(index) {
+    jSlides.forEach(slide => slide.classList.remove('active'));
+    jDots.forEach(dot => dot.classList.remove('active'));
+    
+    if (index >= jSlides.length) currentJSlideIndex = 0;
+    else if (index < 0) currentJSlideIndex = jSlides.length - 1;
+    else currentJSlideIndex = index;
+    
+    jSlides[currentJSlideIndex].classList.add('active');
+    jDots[currentJSlideIndex].classList.add('active');
+}
+
+function nextJSlide() {
+    showJSlide(currentJSlideIndex + 1);
+}
+
+function prevJSlide() {
+    showJSlide(currentJSlideIndex - 1);
+}
+
+function startJSlideShow() {
+    jSlideInterval = setInterval(nextJSlide, 6000); // slide every 6s
+}
+
+function resetJSlideShowInterval() {
+    clearInterval(jSlideInterval);
+    startJSlideShow();
+}
+
+if (prevJBtn && nextJBtn) {
+    prevJBtn.addEventListener('click', () => {
+        prevJSlide();
+        resetJSlideShowInterval();
+    });
+    
+    nextJBtn.addEventListener('click', () => {
+        nextJSlide();
+        resetJSlideShowInterval();
+    });
+}
+
+jDots.forEach(dot => {
+    dot.addEventListener('click', (e) => {
+        const targetIndex = parseInt(e.target.getAttribute('data-j-index'));
+        showJSlide(targetIndex);
+        resetJSlideShowInterval();
+    });
+});
+
+if (jSlides.length > 0) {
+    startJSlideShow();
 }
