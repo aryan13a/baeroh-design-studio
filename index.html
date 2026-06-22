@@ -327,50 +327,50 @@
                 <p class="journal-tagline"><a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer">@baerohdesigns</a></p>
             </div>
             
-            <div class="journal-slider-container reveal-fade">
-                <div class="journal-slider" id="journalSlider">
-                    <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-slide active">
-                        <img src="assets/515018580_17873657514379780_114806818264473941_n.jpg" alt="Baeroh Design photo 1">
-                        <div class="journal-slide-overlay">
-                            <span class="journal-slide-icon">&#128247;</span>
-                        </div>
-                    </a>
-                    <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-slide">
-                        <img src="assets/515375713_17873657511379780_1361309602168478996_n.jpg" alt="Baeroh Design photo 2">
-                        <div class="journal-slide-overlay">
-                            <span class="journal-slide-icon">&#128247;</span>
-                        </div>
-                    </a>
-                    <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-slide">
-                        <img src="assets/515682765_17873657493379780_5956521238110530393_n.jpg" alt="Baeroh Design photo 3">
-                        <div class="journal-slide-overlay">
-                            <span class="journal-slide-icon">&#128247;</span>
-                        </div>
-                    </a>
-                    <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-slide">
-                        <img src="assets/515903200_17873657496379780_2094141731495515911_n.jpg" alt="Baeroh Design photo 4">
-                        <div class="journal-slide-overlay">
-                            <span class="journal-slide-icon">&#128247;</span>
-                        </div>
-                    </a>
-                    <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-slide">
-                        <img src="assets/515963142_17873657523379780_8362843561450044996_n.jpg" alt="Baeroh Design photo 5">
-                        <div class="journal-slide-overlay">
-                            <span class="journal-slide-icon">&#128247;</span>
-                        </div>
-                    </a>
+            <div class="journal-carousel-wrapper reveal-fade">
+                <button class="journal-carousel-btn prev-btn" id="prevJournal" aria-label="Previous slide">&#8592;</button>
+                
+                <div class="journal-carousel-track-container">
+                    <div class="journal-carousel-track" id="journalTrack">
+                        <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-carousel-item">
+                            <img src="assets/515018580_17873657514379780_114806818264473941_n.jpg" alt="Baeroh Design photo 1">
+                            <div class="journal-overlay">
+                                <span class="journal-icon">&#128247;</span>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-carousel-item">
+                            <img src="assets/515375713_17873657511379780_1361309602168478996_n.jpg" alt="Baeroh Design photo 2">
+                            <div class="journal-overlay">
+                                <span class="journal-icon">&#128247;</span>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-carousel-item">
+                            <img src="assets/515682765_17873657493379780_5956521238110530393_n.jpg" alt="Baeroh Design photo 3">
+                            <div class="journal-overlay">
+                                <span class="journal-icon">&#128247;</span>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-carousel-item">
+                            <img src="assets/515903200_17873657496379780_2094141731495515911_n.jpg" alt="Baeroh Design photo 4">
+                            <div class="journal-overlay">
+                                <span class="journal-icon">&#128247;</span>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/baerohdesigns/" target="_blank" rel="noopener noreferrer" class="journal-carousel-item">
+                            <img src="assets/515963142_17873657523379780_8362843561450044996_n.jpg" alt="Baeroh Design photo 5">
+                            <div class="journal-overlay">
+                                <span class="journal-icon">&#128247;</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
                 
-                <div class="journal-slider-controls">
-                    <button class="journal-slider-btn prev-j-btn" id="prevJournal" aria-label="Previous image">&#8592;</button>
-                    <div class="journal-slider-dots" id="journalSliderDots">
-                        <span class="j-dot active" data-j-index="0"></span>
-                        <span class="j-dot" data-j-index="1"></span>
-                        <span class="j-dot" data-j-index="2"></span>
-                        <span class="j-dot" data-j-index="3"></span>
-                        <span class="j-dot" data-j-index="4"></span>
-                    </div>
-                    <button class="journal-slider-btn next-j-btn" id="nextJournal" aria-label="Next image">&#8594;</button>
+                <button class="journal-carousel-btn next-btn" id="nextJournal" aria-label="Next slide">&#8594;</button>
+            </div>
+            
+            <div class="journal-dots-container">
+                <div class="journal-slider-dots" id="journalSliderDots">
+                    <!-- Populated via Javascript -->
                 </div>
             </div>
         </div>

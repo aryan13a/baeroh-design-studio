@@ -339,63 +339,121 @@ if (contactForm) {
     });
 }
 
-// --- Visual Journal Slider Logic ---
-const jSlides = document.querySelectorAll('.journal-slide');
-const jDots = document.querySelectorAll('.journal-slider-dots .j-dot');
+// --- Visual Journal Carousel Logic ---
+const track = document.getElementById('journalTrack');
 const prevJBtn = document.getElementById('prevJournal');
 const nextJBtn = document.getElementById('nextJournal');
+const dotsContainer = document.getElementById('journalSliderDots');
+
 let currentJSlideIndex = 0;
-let jSlideInterval;
+let itemsVisible = 3;
+let carouselInterval;
 
-function showJSlide(index) {
-    jSlides.forEach(slide => slide.classList.remove('active'));
-    jDots.forEach(dot => dot.classList.remove('active'));
+function updateCarouselSettings() {
+    if (!track) return;
+    const width = window.innerWidth;
+    if (width <= 576) {
+        itemsVisible = 1;
+    } else if (width <= 991) {
+        itemsVisible = 2;
+    } else {
+        itemsVisible = 3;
+    }
     
-    if (index >= jSlides.length) currentJSlideIndex = 0;
-    else if (index < 0) currentJSlideIndex = jSlides.length - 1;
-    else currentJSlideIndex = index;
+    const items = track.querySelectorAll('.journal-carousel-item');
+    const totalSteps = Math.max(1, items.length - itemsVisible + 1);
     
-    jSlides[currentJSlideIndex].classList.add('active');
-    jDots[currentJSlideIndex].classList.add('active');
+    // Ensure index is valid
+    if (currentJSlideIndex >= totalSteps) {
+        currentJSlideIndex = totalSteps - 1;
+    }
+    if (currentJSlideIndex < 0) {
+        currentJSlideIndex = 0;
+    }
+    
+    // Build dots dynamically based on number of steps
+    if (dotsContainer) {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSteps; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('j-dot');
+            if (i === currentJSlideIndex) dot.classList.add('active');
+            dot.setAttribute('data-j-index', i);
+            dotsContainer.appendChild(dot);
+            
+            dot.addEventListener('click', (e) => {
+                currentJSlideIndex = parseInt(e.target.getAttribute('data-j-index'));
+                moveToStep(currentJSlideIndex);
+                resetAutoplay();
+            });
+        }
+    }
+    
+    moveToStep(currentJSlideIndex);
 }
 
-function nextJSlide() {
-    showJSlide(currentJSlideIndex + 1);
+function moveToStep(step) {
+    if (!track) return;
+    const items = track.querySelectorAll('.journal-carousel-item');
+    if (items.length === 0) return;
+    
+    const totalSteps = Math.max(1, items.length - itemsVisible + 1);
+    
+    if (step >= totalSteps) currentJSlideIndex = 0;
+    else if (step < 0) currentJSlideIndex = totalSteps - 1;
+    else currentJSlideIndex = step;
+    
+    const firstItem = track.querySelector('.journal-carousel-item');
+    if (!firstItem) return;
+    
+    const itemWidth = firstItem.getBoundingClientRect().width;
+    const gap = parseFloat(window.getComputedStyle(track).gap) || 0;
+    
+    // Translate track
+    const amountToMove = (itemWidth + gap) * currentJSlideIndex;
+    track.style.transform = `translateX(-${amountToMove}px)`;
+    
+    // Update dots
+    if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.j-dot');
+        dots.forEach((dot, idx) => {
+            if (idx === currentJSlideIndex) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    }
 }
 
-function prevJSlide() {
-    showJSlide(currentJSlideIndex - 1);
+function nextCarousel() {
+    moveToStep(currentJSlideIndex + 1);
 }
 
-function startJSlideShow() {
-    jSlideInterval = setInterval(nextJSlide, 6000); // slide every 6s
+function prevCarousel() {
+    moveToStep(currentJSlideIndex - 1);
 }
 
-function resetJSlideShowInterval() {
-    clearInterval(jSlideInterval);
-    startJSlideShow();
+function startAutoplay() {
+    carouselInterval = setInterval(nextCarousel, 5000);
+}
+
+function resetAutoplay() {
+    clearInterval(carouselInterval);
+    startAutoplay();
 }
 
 if (prevJBtn && nextJBtn) {
     prevJBtn.addEventListener('click', () => {
-        prevJSlide();
-        resetJSlideShowInterval();
+        prevCarousel();
+        resetAutoplay();
     });
-    
     nextJBtn.addEventListener('click', () => {
-        nextJSlide();
-        resetJSlideShowInterval();
+        nextCarousel();
+        resetAutoplay();
     });
 }
 
-jDots.forEach(dot => {
-    dot.addEventListener('click', (e) => {
-        const targetIndex = parseInt(e.target.getAttribute('data-j-index'));
-        showJSlide(targetIndex);
-        resetJSlideShowInterval();
-    });
-});
-
-if (jSlides.length > 0) {
-    startJSlideShow();
+if (track) {
+    window.addEventListener('resize', updateCarouselSettings);
+    // Initialize settings
+    updateCarouselSettings();
+    startAutoplay();
 }
