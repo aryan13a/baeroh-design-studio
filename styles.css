@@ -425,12 +425,7 @@ h1, h2, h3, h4 {
     margin-top: 4rem;
 }
 
-/* Asymmetric grid styling on larger screens */
-@media (min-width: 992px) {
-    .portfolio-card:nth-child(even) {
-        margin-top: 5rem;
-    }
-}
+
 
 .portfolio-card {
     cursor: pointer;

@@ -109,13 +109,8 @@ function openModal(projectId) {
     const project = projectsData[projectId];
     if (!project) return;
     
-    // Build Modal Layout with slideshow (removed text description column)
+    // Build Modal Layout with slideshow (removed text description and header details)
     modalContent.innerHTML = `
-        <div class="modal-header">
-            <h3 class="modal-title">${project.title}</h3>
-            <span class="modal-meta">${project.category} &mdash; ${project.city}</span>
-        </div>
-        
         <div class="modal-slideshow-container">
             <div class="modal-slides-wrapper">
                 ${project.images.map((imgUrl, i) => `
