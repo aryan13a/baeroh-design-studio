@@ -3,7 +3,7 @@
 // --- Project Data ---
 const projectsData = {
     1: {
-        title: "Image 1",
+        title: "Executive Workspace",
         images: [
             "assets/unnamed (4).webp",
             "assets/515018580_17873657514379780_114806818264473941_n.jpg",
@@ -11,7 +11,7 @@ const projectsData = {
         ]
     },
     2: {
-        title: "Image 2",
+        title: "Private Director's Cabin",
         images: [
             "assets/unnamed (1).webp",
             "assets/515375713_17873657511379780_1361309602168478996_n.jpg",
@@ -19,7 +19,7 @@ const projectsData = {
         ]
     },
     3: {
-        title: "Image 3",
+        title: "Collaborative Workspace",
         images: [
             "assets/unnamed (2).webp",
             "assets/515682765_17873657493379780_5956521238110530393_n.jpg",
@@ -27,7 +27,7 @@ const projectsData = {
         ]
     },
     4: {
-        title: "Image 4",
+        title: "Bespoke Vanity Corner",
         images: [
             "assets/unnamed (3).webp",
             "assets/515903200_17873657496379780_2094141731495515911_n.jpg",
@@ -35,7 +35,7 @@ const projectsData = {
         ]
     },
     5: {
-        title: "Image 5",
+        title: "Contemporary Team Workspace",
         images: [
             "assets/unnamed.webp",
             "assets/515963142_17873657523379780_8362843561450044996_n.jpg",
@@ -43,7 +43,7 @@ const projectsData = {
         ]
     },
     6: {
-        title: "Image 6",
+        title: "Executive Lounge",
         images: [
             "assets/unnamed (5).webp",
             "assets/515018580_17873657514379780_114806818264473941_n.jpg",
